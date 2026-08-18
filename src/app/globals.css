@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+/* ---------------------------------------------------------
+   Design tokens -- "Civic Registry"
+   A job board that treats a listing like an official notice:
+   ink, paper, a brass verification seal for government posts,
+   a deep teal for the private sector, ledger-style dividers.
+--------------------------------------------------------- */
+:root {
+  --ink: #10182B;         /* primary dark surface / text */
+  --ink-soft: #545F72;    /* secondary text on paper */
+  --ink-faint: #8992A3;   /* tertiary text */
+  --paper: #F2F1EC;       /* app background -- cool registry paper, not cream */
+  --card: #FFFFFF;        /* raised surfaces */
+  --line: #DCDACF;        /* hairline borders on paper */
+  --line-soft: #E8E6DC;
+  --gold: #92702B;        /* government seal / brass accent */
+  --gold-soft: #F1E7D1;
+  --teal: #0F5C50;        /* private sector / primary interactive */
+  --teal-soft: #DCEAE6;
+  --rust: #A33F26;        /* alerts / flagged / destructive */
+  --rust-soft: #F3E1DA;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html { color-scheme: light; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01";
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.font-mono, .ref-number {
+  font-family: var(--font-mono);
+}
+
+::selection { background: var(--gold-soft); color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* Ledger paper texture -- faint horizontal rules, used on ink surfaces */
+.ledger-rule {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    rgba(255, 255, 255, 0.045) 28px
+  );
+}
+
+/* Perforated divider -- evokes a ticket / gazette stub */
+.stub-divider {
+  border-top: 1px dashed var(--line);
+}
+
+/* Government verification seal -- the page's signature element */
+.seal {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  flex-shrink: 0;
+  transform: rotate(-6deg);
+}
+.seal::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 999px;
+  border: 1px dotted var(--gold);
+}
+.seal-mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  text-align: center;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.6rem 1.25rem;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-primary:hover { background: #060B16; }
+.btn-teal { background: var(--teal); color: #fff; }
+.btn-teal:hover { background: #0B463D; }
+.btn-outline { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+.btn-outline:hover { background: var(--paper); }
